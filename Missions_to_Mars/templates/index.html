@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mission to Mars</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head> 
+<body class="text-white" style="background-color: grey;">
+    <div class="container">
+            <h1 style="text-align: center" class="display-3"><b>Mission to Mars</b></h1>
+            <p><a class="btn btn-danger btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+    </div>
+        <div class="container">
+            <div class="row" id="mars-news">
+                <div class="media">
+                    <div class="media-body">
+                        <h4>Latest Mars News</h4>
+                        <h5>{{data.title}}</h5>
+                        <p style="color: #8B0000">{{data.para}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>   
+        <!-- Image -->
+        <div class="container">
+            <div class="row" id="mars-featured-image">
+                <div class="col-lg-8 col-md-8 col-sm-12">
+                <h4>Featured Mars Image</h4>
+
+                    <img src="{{data.image_url}}" class="img-responsive" style="max-width:100%; max-height: auto;" alt="Mars Image"/>
+                </div>
+ 
+                <div class="col-lg-4 col-md-4 col-sm-12" id="mars-weather">
+                    <!-- Mars Facts -->
+                    <br>
+                    <div class="row" id="mars-facts">
+                        <div class="col-md-12">
+                            <h4>Mars Facts</h4>
+                            {{data.table_facts|safe}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Mars Hemispheres -->
+        <h4 style="padding-top: 50px; margin-top: 100px; text-align: center;">Mars Hemispheres</h4>
+        <div class="card-deck">
+            <hr>
+            <div class="col-md-12">
+                <div class="row" id="mars-hemispheres">
+                    {% for row in data.hemisphere %}
+                    <div class="col-md-6">
+                        <div class="card text-white bg-danger" style="margin: 30px;">
+                            <img class="card-img-top" src="{{row.url}}" alt="Featured Image"/>
+                            <div class="card-body">
+                                <p class="card-text">{{row.title}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
